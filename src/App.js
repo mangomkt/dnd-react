@@ -31,7 +31,7 @@ function App() {
       const container = {};
       const inputType = formValue.map(e => {
         
-        if(e.value === "Submit" || e.value === "") return;
+        if(e.value === "Submit" || e.value === "") { return null };
 
         
         container[e.name] = e.value;
