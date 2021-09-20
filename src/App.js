@@ -19,9 +19,13 @@ function App() {
     constructor(props) {
       super(props);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
     }
 
-
+    handleChange(event) {
+      console.log(event.target.value);
+      setSelectedOption(event.target.value);
+    }
     handleSubmit(event) {
       event.preventDefault();
       const items = Array.from(contacts);
@@ -57,7 +61,7 @@ function App() {
       return (
         <form onSubmit={this.handleSubmit} id="compForm">
           <div className="formItem">
-            <select name="comptype">
+            <select name="comptype" value={selectedOption} onChange={this.handleChange}>
               <option >Choose</option>
               <option value="TextSnippet">TextSnippet</option>
               <option value="HighlightedText">HighlightedText</option>
@@ -73,13 +77,18 @@ function App() {
             </textarea>
             <label>text:</label>
           </div>
+          {selectedOption === "TextSnippet" && 
+            <div>
+              Super Cool TextSnippet
+            </div>
+          }
           <input type="submit" value="Submit" />
         </form>
       );
     }
   }
   const [contacts, updateContacts] = useState(contactList)
-
+  const [selectedOption, setSelectedOption] = useState({}); // <-- add selected option state
   function handleOnDragEnd(result) {
     if(!result.destination) return;
     const items = Array.from(contacts);
