@@ -68,20 +68,19 @@ function App() {
             </select>
             <label>Type:</label>
           </div>
-          <div className="formItem">
-            <input name="title" type="text" />
-            <label>title:</label>
-          </div>
-          <div className="formItem">
-            <textarea name="text" >
-            </textarea>
-            <label>text:</label>
-          </div>
           {selectedOption === "TextSnippet" && 
-            <div>
-              Super Cool TextSnippet
+            <div className="formItem">
+              <input name="title" type="text" />
+              <label>title:</label>
             </div>
           }
+          {selectedOption === "TextSnippet" || selectedOption === "HighlightedText"  ? 
+            <div className="formItem">
+              <textarea name="text" >
+              </textarea>
+              <label>text:</label>
+            </div>
+           : null}
           <input type="submit" value="Submit" />
         </form>
       );
@@ -112,8 +111,16 @@ function App() {
                 {(provided) => (
                 <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                     Type: {comptype}<br />
-                    Title: {title}<br />
-                    {text}
+                    {title && 
+                      <>
+                      Title: {title}<br />
+                      </>
+                    }
+                    {text && 
+                      <>
+                      Text: {text}
+                      </>
+                    }
                 </li>
                 )}
                 </Draggable>
